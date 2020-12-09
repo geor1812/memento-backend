@@ -1,5 +1,6 @@
 package com.memento.backend.service;
 
+import com.memento.backend.exception.ResourceNotFoundException;
 import com.memento.backend.model.Note;
 import com.memento.backend.repo.NoteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class NoteService {
 
     public ResponseEntity<Note> getNoteById(int id){
         Note note = noteRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));
 
         return new ResponseEntity<>(note, HttpStatus.OK);
     }

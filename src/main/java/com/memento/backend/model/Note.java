@@ -43,5 +43,12 @@ public class Note {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    //Constructor for testing purposes
+    public Note(int id, String title, String content){
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
 }
 

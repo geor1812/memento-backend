@@ -37,6 +37,28 @@ class BackendApplicationTests {
         assertThat(noteList).isEmpty();
     }
 
+    @Test
+    public void should_find_all_notes(){
+        noteRepo.save(new Note(1, "test", "test"));
+        noteRepo.save(new Note(2, "test", "test"));
+        noteRepo.save(new Note(3, "test", "test"));
+
+        List<Note> noteList = noteRepo.findAll();
+        assertThat(noteList).hasSize(3);
+    }
+
+    @Test
+    public void should_find_note_by_id(){
+        Note n1 = new Note(1, "test", "test");
+        Note n2 = new Note(2, "test", "test");
+
+        entityManager.persist(n1);
+        entityManager.persist(n2);
+
+        Note foundNote = noteRepo.findById(n2.getId()).get();
+
+        assertThat(foundNote).isEqualTo(n2);
+    }
 
 
 
