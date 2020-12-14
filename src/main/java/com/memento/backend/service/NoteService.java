@@ -44,9 +44,6 @@ public class NoteService {
         _note.setId(note.getId());
         _note.setTitle(note.getTitle());
         _note.setContent(note.getContent());
-        //_note.setCreatedAt(note.getCreatedAt());
-        //_note.setUpdatedAt(note.setUpdatedAt());
-
         return new ResponseEntity<>(noteRepo.save(_note), HttpStatus.OK);
     }
 
@@ -55,5 +52,4 @@ public class NoteService {
         noteRepo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
