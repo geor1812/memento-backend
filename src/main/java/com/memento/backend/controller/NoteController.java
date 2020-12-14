@@ -28,19 +28,19 @@ public class NoteController {
 
     //Create a note
     @PostMapping("/notes")
-    public ResponseEntity<Note> createCustomer(@RequestBody Note note) {
+    public ResponseEntity<Note> createNote(@RequestBody Note note) {
         return noteService.createNote(note);
     }
 
     //Update a note
     @PutMapping("/notes/{id}")
-    public ResponseEntity<Note> updateCustomer(@PathVariable("id") int id, @RequestBody Note note) {
+    public ResponseEntity<Note> updateNote(@PathVariable("id") int id, @RequestBody Note note) {
         return noteService.updateNote(id, note);
     }
 
     //Delete a note
     @DeleteMapping("/notes/{id}")
-    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") int id) {
+    public ResponseEntity<HttpStatus> deleteNote(@PathVariable("id") int id) {
         return noteService.deleteNote(id);
     }
     

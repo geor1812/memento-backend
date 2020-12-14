@@ -20,6 +20,7 @@ import java.util.Date;
 @Table(name = "notes")
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
+
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")

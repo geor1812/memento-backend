@@ -16,7 +16,7 @@ import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class BackendApplicationTests {
+class NoteIntegrationTests {
 
     @Autowired
     private TestEntityManager entityManager;
