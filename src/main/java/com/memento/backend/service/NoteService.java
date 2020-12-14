@@ -15,7 +15,7 @@ public class NoteService {
     @Autowired
     NoteRepo noteRepo;
 
-
+    //Get all notes
     public ResponseEntity<List<Note>> getAllNotes() {
             List<Note> noteList = noteRepo.findAll();
          if(noteList.isEmpty()) {
@@ -24,6 +24,7 @@ public class NoteService {
          return new ResponseEntity<>(noteList,HttpStatus.OK);
     }
 
+    //get a note by id
     public ResponseEntity<Note> getNoteById(int id){
         Note note = noteRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));
@@ -31,5 +32,28 @@ public class NoteService {
         return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
+    //Create a note
+    public ResponseEntity<Note> createNote(Note note) {
+        return new ResponseEntity<>(noteRepo.save(note), HttpStatus.CREATED);
+    }
+
+    //Update a customer
+    public ResponseEntity<Note> updateNote(int id, Note note) {
+        Note _note = noteRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));
+        _note.setId(note.getId());
+        _note.setTitle(note.getTitle());
+        _note.setContent(note.getContent());
+        //_note.setCreatedAt(note.getCreatedAt());
+        //_note.setUpdatedAt(note.setUpdatedAt());
+
+        return new ResponseEntity<>(noteRepo.save(_note), HttpStatus.OK);
+    }
+
+    //Delete a customer
+    public ResponseEntity<HttpStatus> deleteNote(int id) {
+        noteRepo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
