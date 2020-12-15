@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,11 +17,18 @@ public class NoteService {
     NoteRepo noteRepo;
 
     //Get all notes
-    public ResponseEntity<List<Note>> getAllNotes() {
-            List<Note> noteList = noteRepo.findAll();
+    public ResponseEntity<List<Note>> getAllNotes(String searchTerm) {
+        List<Note> noteList;
+
+        if(searchTerm == null) {
+            noteList = noteRepo.findAll();
+        } else {
+            noteList = noteRepo.findByTitleContaining(searchTerm);
+        }
+
          if(noteList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+         }
          return new ResponseEntity<>(noteList,HttpStatus.OK);
     }
 

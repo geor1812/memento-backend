@@ -20,7 +20,7 @@ public class NoteController {
 
     //Get all notes
     @GetMapping("/notes")
-    public ResponseEntity<List<Note>> getAllNotes() { return noteService.getAllNotes(); }
+    public ResponseEntity<List<Note>> getAllNotes(@RequestParam(required = false) String searchTerm) { return noteService.getAllNotes(searchTerm); }
 
     //Get a note by id
     @GetMapping("/notes/{id}")
