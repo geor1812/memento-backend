@@ -10,7 +10,9 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -44,6 +46,12 @@ public class Note {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    @Column(nullable = false)
+    private boolean checklist;
+
+    @OneToMany(mappedBy = "note")
+    private Set<Item> itemsById;
 
     //Constructor for testing purposes
     public Note(int id, String title, String content){
