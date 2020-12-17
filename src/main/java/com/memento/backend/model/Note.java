@@ -50,8 +50,24 @@ public class Note {
     @Column(nullable = false)
     private boolean checklist;
 
+    public void setChecklist(boolean checklist) {
+        this.checklist = checklist;
+    }
+
+    public boolean getChecklist() {
+        return this.checklist;
+    }
+
     @OneToMany(mappedBy = "note")
-    private Set<Item> itemsById;
+    private Set<Item> items;
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
+    public Set<Item> getItems() {
+        return this.items;
+    }
 
     //Constructor for testing purposes
     public Note(int id, String title, String content){

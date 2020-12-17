@@ -60,6 +60,4 @@ class NoteIntegrationTests {
         assertThat(foundNote).isEqualTo(n2);
     }
 
-
-
 }
