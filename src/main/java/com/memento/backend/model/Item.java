@@ -24,6 +24,10 @@ public class Item {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "checked", nullable = false)
+    private boolean checked;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "note_id", referencedColumnName = "id", nullable = false)
     private Note note;
