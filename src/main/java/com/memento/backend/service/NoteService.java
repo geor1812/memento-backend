@@ -51,7 +51,7 @@ public class NoteService {
         return new ResponseEntity<>(noteRepo.save(note), HttpStatus.CREATED);
     }
 
-    //Update a customer
+    //Update a note
     public ResponseEntity<Note> updateNote(int id, Note note) {
         Note _note = noteRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));

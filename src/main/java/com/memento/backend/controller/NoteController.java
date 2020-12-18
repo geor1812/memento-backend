@@ -1,6 +1,8 @@
 package com.memento.backend.controller;
 
+import com.memento.backend.model.Item;
 import com.memento.backend.model.Note;
+import com.memento.backend.service.ItemService;
 import com.memento.backend.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,14 @@ public class NoteController {
 
     @Autowired
     NoteService noteService;
+    @Autowired
+    ItemService itemService;
+
+    //Create an item
+    @PostMapping("/notes/{noteId}/items")
+    public ResponseEntity<Item> createItem(@PathVariable(value = "noteId") Integer noteId, @RequestBody Item item) {
+        return itemService.createItem(noteId, item);
+    }
 
     //Get all notes
     @GetMapping("/notes")

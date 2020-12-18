@@ -4,19 +4,28 @@ import com.memento.backend.exception.ResourceNotFoundException;
 import com.memento.backend.model.Item;
 import com.memento.backend.model.Note;
 import com.memento.backend.repo.ItemRepo;
+import com.memento.backend.repo.NoteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ItemService {
     @Autowired
     ItemRepo itemRepo;
+    @Autowired
+    NoteRepo noteRepo;
 
     //Create an item
-    public ResponseEntity<Item> createItem(Item item) {
-        return new ResponseEntity<>(itemRepo.save(item), HttpStatus.CREATED);
+    public ResponseEntity<Item> createItem(Integer noteId, Item item) {
+        Note note = noteRepo.findById(noteId)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", noteId));
+        item.setNote(note);
+        return new ResponseEntity<>(itemRepo.save(item), HttpStatus.OK);
     }
 
     //Update a customer
