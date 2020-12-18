@@ -28,7 +28,7 @@ public class ItemService {
         return new ResponseEntity<>(itemRepo.save(item), HttpStatus.OK);
     }
 
-    //Update a customer
+    //Update an item
     public ResponseEntity<Item> updateItem(int id, Item item) {
         Item _item = itemRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item", "id", id));
@@ -36,6 +36,11 @@ public class ItemService {
         _item.setContent(item.getContent());
         _item.setChecked(item.isChecked());
         return new ResponseEntity<>(itemRepo.save(_item), HttpStatus.OK);
+    }
+
+    public ResponseEntity<HttpStatus> deleteItem(int id) {
+        itemRepo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
 

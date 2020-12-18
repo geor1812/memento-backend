@@ -69,9 +69,11 @@ public class NoteService {
         return new ResponseEntity<>(noteRepo.save(_note), HttpStatus.OK);
     }
 
-    //Delete a customer
+    //Delete a note
     public ResponseEntity<HttpStatus> deleteNote(int id) {
         noteRepo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 }

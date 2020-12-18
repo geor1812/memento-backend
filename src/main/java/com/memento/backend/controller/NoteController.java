@@ -28,6 +28,12 @@ public class NoteController {
         return itemService.createItem(noteId, item);
     }
 
+    //Delete an item
+    @DeleteMapping("/items/{id}")
+    public ResponseEntity<HttpStatus> deleteItem(@PathVariable(value = "id") Integer id) {
+        return itemService.deleteItem(id);
+    }
+
     //Get all notes
     @GetMapping("/notes")
     public ResponseEntity<List<Note>> getAllNotes(@RequestParam(required = false) String searchTerm) { return noteService.getAllNotes(searchTerm); }
