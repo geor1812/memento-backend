@@ -31,4 +31,10 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "note_id", referencedColumnName = "id", nullable = false)
     private Note note;
+
+    public Item(String content, boolean checked, Note note){
+        this.content = content;
+        this.checked = checked;
+        this.note = note;
+    }
 }

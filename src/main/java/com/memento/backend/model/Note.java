@@ -69,9 +69,26 @@ public class Note {
         return this.items;
     }
 
-    //Constructor for testing purposes
+    //Constructors for testing purposes
     public Note(int id, String title, String content){
         this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
+    public Note(String title, String content, Boolean checklist){
+        this.title = title;
+        this.content = content;
+        this.checklist = checklist;
+    }
+
+    public Note(String title, String content, Boolean checklist, Set<Item> items){
+        this.title = title;
+        this.content = content;
+        this.checklist = checklist;
+    }
+
+    public Note(String title, String content){
         this.title = title;
         this.content = content;
     }
