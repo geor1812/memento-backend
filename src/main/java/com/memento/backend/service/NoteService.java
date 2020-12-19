@@ -60,6 +60,7 @@ public class NoteService {
         _note.setContent(note.getContent());
         _note.setChecklist(note.getChecklist());
         _note.setItems(note.getItems());
+        _note.setFolder(note.getFolder());
 
         Set<Item> itemSet = note.getItems();
         for (Item item:itemSet) {
