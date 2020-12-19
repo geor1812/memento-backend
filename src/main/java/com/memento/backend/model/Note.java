@@ -1,5 +1,6 @@
 package com.memento.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -68,6 +69,11 @@ public class Note {
     public Set<Item> getItems() {
         return this.items;
     }
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "folder_id", referencedColumnName = "id", nullable = false)
+    private Folder folder;
 
     //Constructors for testing purposes
     public Note(int id, String title, String content){
