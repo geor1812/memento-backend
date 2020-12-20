@@ -27,13 +27,17 @@ public class NoteService {
     FolderRepo folderRepo;
 
     //Get all notes
-    public ResponseEntity<List<Note>> getAllNotes(String searchTerm) {
+    public ResponseEntity<List<Note>> getAllNotes(Integer folderId, String searchTerm) {
         List<Note> noteList;
 
+        Folder folder = folderRepo.findById(folderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Folder", "id", folderId));
+
         if(searchTerm == null) {
-            noteList = noteRepo.findAll();
+            noteList = noteRepo.findByFolder(folder);
         } else {
-            noteList = noteRepo.findByTitleContaining(searchTerm);
+
+            noteList = noteRepo.findByFolderAndTitleContaining(folder, searchTerm);
         }
 
          if(noteList.isEmpty()) {

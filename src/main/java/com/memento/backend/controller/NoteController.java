@@ -35,8 +35,8 @@ public class NoteController {
 
     //Get all notes
     @CrossOrigin
-    @GetMapping("/notes")
-    public ResponseEntity<List<Note>> getAllNotes(@RequestParam(required = false) String searchTerm) { return noteService.getAllNotes(searchTerm); }
+    @GetMapping("/notes/folder/{folderId}")
+    public ResponseEntity<List<Note>> getAllNotes(@PathVariable("folderId") Integer folderId, @RequestParam(required = false) String searchTerm) { return noteService.getAllNotes(folderId, searchTerm); }
 
     //Get a note by id
     @CrossOrigin

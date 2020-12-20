@@ -61,20 +61,6 @@ class NoteIntegrationTests {
     }
 
     @Test
-    public void should_find_notes_that_contain_searchterm_in_name() {
-        Note n1 = new Note( "testcow", "test");
-        Note n2 = new Note( "test", "dog");
-        Note n3 = new Note("testcow","pig");
-        entityManager.persist(n1);
-        entityManager.persist(n2);
-        entityManager.persist(n3);
-
-        List<Note> noteList = noteRepo.findByTitleContaining("testcow");
-        assertThat(noteList).hasSize(2);
-        assertThat(noteList).contains(n1,n3);
-    }
-
-    @Test
     public void should_update_note(){
 
         Note n = new Note("title","content",false);
