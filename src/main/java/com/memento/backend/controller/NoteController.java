@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {
-        "http://localhost:8081"
-})
 @RestController
 public class NoteController {
 
@@ -23,38 +20,45 @@ public class NoteController {
     ItemService itemService;
 
     //Create an item
+    @CrossOrigin
     @PostMapping("/notes/{noteId}/items")
     public ResponseEntity<Item> createItem(@PathVariable(value = "noteId") Integer noteId, @RequestBody Item item) {
         return itemService.createItem(noteId, item);
     }
 
     //Delete an item
+    @CrossOrigin
     @DeleteMapping("/items/{id}")
     public ResponseEntity<HttpStatus> deleteItem(@PathVariable(value = "id") Integer id) {
         return itemService.deleteItem(id);
     }
 
     //Get all notes
+    @CrossOrigin
     @GetMapping("/notes")
     public ResponseEntity<List<Note>> getAllNotes(@RequestParam(required = false) String searchTerm) { return noteService.getAllNotes(searchTerm); }
 
     //Get a note by id
+    @CrossOrigin
     @GetMapping("/notes/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable("id") int id) { return noteService.getNoteById(id); }
 
     //Create a note
-    @PostMapping("/notes")
-    public ResponseEntity<Note> createNote(@RequestBody Note note) {
-        return noteService.createNote(note);
+    @CrossOrigin
+    @PostMapping("/notes/create/{folderId}")
+    public ResponseEntity<Note> createNote(@PathVariable("folderId") Integer folderId, @RequestBody Note note) {
+        return noteService.createNote(folderId, note);
     }
 
     //Update a note
+    @CrossOrigin
     @PutMapping("/notes/{id}")
     public ResponseEntity<Note> updateNote(@PathVariable("id") int id, @RequestBody Note note) {
         return noteService.updateNote(id, note);
     }
 
     //Delete a note
+    @CrossOrigin
     @DeleteMapping("/notes/{id}")
     public ResponseEntity<HttpStatus> deleteNote(@PathVariable("id") int id) {
         return noteService.deleteNote(id);

@@ -1,8 +1,10 @@
 package com.memento.backend.service;
 
 import com.memento.backend.exception.ResourceNotFoundException;
+import com.memento.backend.model.Folder;
 import com.memento.backend.model.Item;
 import com.memento.backend.model.Note;
+import com.memento.backend.repo.FolderRepo;
 import com.memento.backend.repo.ItemRepo;
 import com.memento.backend.repo.NoteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class NoteService {
     NoteRepo noteRepo;
     @Autowired
     ItemService itemService;
+    @Autowired
+    FolderRepo folderRepo;
 
     //Get all notes
     public ResponseEntity<List<Note>> getAllNotes(String searchTerm) {
@@ -47,8 +51,11 @@ public class NoteService {
     }
 
     //Create a note
-    public ResponseEntity<Note> createNote(Note note) {
-        return new ResponseEntity<>(noteRepo.save(note), HttpStatus.CREATED);
+    public ResponseEntity<Note> createNote(Integer folderId, Note note) {
+        Folder folder = folderRepo.findById(folderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Folder", "id", folderId));
+        note.setFolder(folder);
+        return new ResponseEntity<>(noteRepo.save(note), HttpStatus.OK);
     }
 
     //Update a note
@@ -60,7 +67,6 @@ public class NoteService {
         _note.setContent(note.getContent());
         _note.setChecklist(note.getChecklist());
         _note.setItems(note.getItems());
-        _note.setFolder(note.getFolder());
 
         Set<Item> itemSet = note.getItems();
         for (Item item:itemSet) {
